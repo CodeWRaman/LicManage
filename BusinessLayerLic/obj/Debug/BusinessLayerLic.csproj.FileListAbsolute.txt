@@ -1,0 +1,9 @@
+C:\Users\Admin\source\repos\BusinessLayerLic\bin\Debug\BusinessLayerLic.dll
+C:\Users\Admin\source\repos\BusinessLayerLic\bin\Debug\BusinessLayerLic.pdb
+C:\Users\Admin\source\repos\BusinessLayerLic\bin\Debug\DataAccessLayerLic.dll
+C:\Users\Admin\source\repos\BusinessLayerLic\bin\Debug\DataAccessLayerLic.pdb
+C:\Users\Admin\source\repos\BusinessLayerLic\obj\Debug\BusinessLayerLic.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\BusinessLayerLic\obj\Debug\BusinessLayerLic.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\BusinessLayerLic\obj\Debug\Business.BC3A8F3C.Up2Date
+C:\Users\Admin\source\repos\BusinessLayerLic\obj\Debug\BusinessLayerLic.dll
+C:\Users\Admin\source\repos\BusinessLayerLic\obj\Debug\BusinessLayerLic.pdb
