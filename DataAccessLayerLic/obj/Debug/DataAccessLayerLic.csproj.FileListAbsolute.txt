@@ -1,0 +1,6 @@
+C:\Users\Admin\source\repos\DataAccessLayerLic\bin\Debug\DataAccessLayerLic.dll
+C:\Users\Admin\source\repos\DataAccessLayerLic\bin\Debug\DataAccessLayerLic.pdb
+C:\Users\Admin\source\repos\DataAccessLayerLic\obj\Debug\DataAccessLayerLic.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\DataAccessLayerLic\obj\Debug\DataAccessLayerLic.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\DataAccessLayerLic\obj\Debug\DataAccessLayerLic.dll
+C:\Users\Admin\source\repos\DataAccessLayerLic\obj\Debug\DataAccessLayerLic.pdb
