@@ -13,6 +13,7 @@ namespace DataAccessLayerLic
     {
         public struct stPeople
         {
+            // test
            public int PersonID { get; set; }
            
             public string NationalNo { get; set; }
