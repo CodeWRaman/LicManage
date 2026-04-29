@@ -12,7 +12,7 @@ namespace BusinessLayerLic
     public class clsBusinessPeople
     {
         enum enMode { enAdd ,enUpdate};
-        // call
+        // oh 
         enMode Mode = enMode.enAdd; 
 
         public int PersonID { get; set; }
