@@ -11,26 +11,7 @@ namespace DataAccessLayerLic
 {
     public class clsDataAccessPeople : AccountSetting
     {
-        public struct stPeople
-        {
-            // test 
-            // test test
-           public int PersonID { get; set; }
-           
-            public string NationalNo { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public DateTime DateOfBirth { get; set; }
-            public string Address { get; set; }
-            public string Email { get; set; }
-            public string Nationallity { get; set; }
-            public string PhoneNumber { get; set; }
-            public string Gendor { get; set; }
-            public string ImagePath { get; set; }
-            public int CountryID { get; set; }
-
-
-        }
+      
         public static DataTable GetPeopleFromAccess()
         {
             DataTable db = new DataTable(); 
@@ -203,27 +184,31 @@ namespace DataAccessLayerLic
         }
 
 
-        
-        public static List<stPeople> GetListOfPeople(string caseName,string value)
+
+        public static List<clsPeopleDOT> GetListOfPeople(string caseName, string value)
         {
-           
-            List<stPeople> ListPeople = new List<stPeople>();
+
+            List<clsPeopleDOT> ListPeople = new List<clsPeopleDOT>();
 
             SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
+            if(ClsDataAccessValidation.ValidationOnCaseName(caseName))
+            {
+                 throw new ArgumentException("Invalid column name.");
+            }
             string query = "Select *From Persons Where " + caseName + " = @value";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
-            cmd.Parameters.AddWithValue("@value", value); 
+            cmd.Parameters.AddWithValue("@value", value);
 
             try
             {
                 connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader(); 
+                SqlDataReader reader = cmd.ExecuteReader();
 
-                while(reader.Read())
+                while (reader.Read())
                 {
-                    stPeople people = new stPeople();
+                    clsPeopleDOT people = new clsPeopleDOT();
                     people.PersonID = (int)reader["PersonID"];
                     people.NationalNo = (string)reader["NationalNumber"];
                     people.FirstName = (string)reader["FirstName"];
@@ -231,7 +216,7 @@ namespace DataAccessLayerLic
                     people.DateOfBirth = (DateTime)reader["DateOfBirth"];
                     people.Address = (string)reader["Address"];
                     people.Email = (string)reader["Email"];
-                    people.Nationallity = (string)reader["Nationality"];
+                    people.Nationality = (string)reader["Nationality"];
                     if (reader["ImagePath"] != DBNull.Value)
                     {
                         people.ImagePath = (string)reader["ImagePath"];
@@ -246,19 +231,19 @@ namespace DataAccessLayerLic
                     people.CountryID = (int)reader["CountryID"];
 
                     ListPeople.Add(people);
-                
+
 
 
                 }
-                reader.Close(); 
+                reader.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
             }
             finally
             {
-                connection.Close(); 
+                connection.Close();
             }
 
             return ListPeople;

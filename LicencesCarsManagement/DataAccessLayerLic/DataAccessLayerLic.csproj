@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountSetting.cs" />
+    <Compile Include="ClsDataAccessValidation.cs" />
+    <Compile Include="clsPeopleDOT.cs" />
     <Compile Include="clsDataAccessPeople.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

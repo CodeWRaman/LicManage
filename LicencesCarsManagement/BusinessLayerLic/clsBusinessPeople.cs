@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using DataAccessLayerLic; 
 
+
 namespace BusinessLayerLic
 {
     public class clsBusinessPeople
@@ -123,11 +124,12 @@ namespace BusinessLayerLic
 
         public static List<clsBusinessPeople> FindPersons(string caseName, string value)
         {
+            
              
             List<clsBusinessPeople> List = new List<clsBusinessPeople>();
-            List<clsDataAccessPeople.stPeople> People = clsDataAccessPeople.GetListOfPeople(caseName, value);
-            NumberTest = People.Count; 
-            foreach(clsDataAccessPeople.stPeople pe in People)
+            List<clsPeopleDOT> People = clsDataAccessPeople.GetListOfPeople(caseName,value); 
+            
+            foreach(clsPeopleDOT pe in People)
             {
                 clsBusinessPeople person = new clsBusinessPeople();
                 person.PersonID = pe.PersonID;
@@ -136,7 +138,7 @@ namespace BusinessLayerLic
                 person.LastName = pe.LastName;
                 person.DateOfBirth = pe.DateOfBirth;
                 person.Adderss = pe.Address;
-                person.Nationality = pe.Nationallity;
+                person.Nationality = pe.Nationality;
                 person.PhoneNumber = pe.PhoneNumber;
                 person.Email = pe.Email;
                 person.Gendor = pe.Gendor;

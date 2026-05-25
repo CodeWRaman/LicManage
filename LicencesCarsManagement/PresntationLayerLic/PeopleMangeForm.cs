@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayerLic;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace PresntationLayerLic
 {
@@ -15,23 +16,36 @@ namespace PresntationLayerLic
     {
         private DataTable dt = new DataTable(); 
 
-        private enum enSlected {enNone =0,enPersonID =1, enNationalityNo = 2 , enFirstName=3 ,
-            enLastName =4,enNationality = 5,enGendor = 6,enPhone = 7,enEmail = 8};
+       
         public PeopleMangeForm()
         {
-            dt = clsBusinessPeople.GetPeopleFromBusinesss();
+            
             InitializeComponent();
             RestToDefault(); 
         }
 
-        
+        private string WithoutSpaces(string str)
+        {
+            string result = "";
+
+            for(int i=0;i<str.Length;i++)
+            {
+                if (!char.IsWhiteSpace(str[i]))
+                {
+                    result += str[i]; 
+                }
+            }
+
+
+            return result; 
+        }
 
       
         private void RestToDefault()
         {
-           
-            
-            
+
+            dt.Clear(); 
+            dt = clsBusinessPeople.GetPeopleFromBusinesss();
             if (dt != null)
             {
                 foreach(DataRow row in dt.Rows)
@@ -48,20 +62,49 @@ namespace PresntationLayerLic
                 MessageBox.Show("No People in the System"); 
             }
 
-            comboFilterPeople.SelectedIndex = 0; 
+            comboFilterPeople.SelectedIndex = 0;
+            txtBoxFilter.Visible = false; 
                 
             
         }
 
         // Filter Handling 
         // by me 
+
+        private void HandleListByItem(string CaseName)
+        {
+            dataGridViewPeopleManage.Rows.Clear();
+            string value = txtBoxFilter.Text;
+           
+            List<clsBusinessPeople> Persons = clsBusinessPeople.FindPersons(CaseName,value);
+
+            if (Persons != null)
+            {
+                foreach (clsBusinessPeople row in Persons )
+                {
+                    dataGridViewPeopleManage.Rows.Add(row.PersonID, row.NationalNo, row.FirstName, row.LastName,
+                        Convert.ToDateTime(row.DateOfBirth).ToString("yyyy - MM - dd"), row.Adderss, row.Email, row.Nationality,
+                        row.PhoneNumber, row.Gendor);
+
+                }
+            }
+            else
+            {
+                // MessageBox.Show("Error");
+                dataGridViewPeopleManage.Rows.Clear();
+            }
+
+         
+        }
         private void listPeopleByItems(int Selected)
         {
-            string value = txtBoxFilter.Text;
+           
             List<clsBusinessPeople> persons = new List<clsBusinessPeople>();
-            persons.Clear(); 
+            persons.Clear();
+            string CaseName = WithoutSpaces(comboFilterPeople.SelectedItem.ToString());
+            
 
-            if (FilterSelect(Selected) == enSlected.enPersonID)
+            if (CaseName == WithoutSpaces("Person ID"))
             {
                 int Check = clsValidation.CheckIfIntegerFormat(txtBoxFilter.Text);
                 int NumberID = -1;
@@ -88,117 +131,58 @@ namespace PresntationLayerLic
 
             }
 
-            if (FilterSelect(Selected) == enSlected.enNationalityNo)
+            if (CaseName == WithoutSpaces("National No.")) 
             {
-                value = txtBoxFilter.Text;
-                clsBusinessPeople Person = clsBusinessPeople.FindPersonByStr("NationalNumber",  value);
-                if (Person != null)
-                {
-                    dataGridViewPeopleManage.Rows.Clear();
-                    dataGridViewPeopleManage.Rows.Add(Person.PersonID, Person.NationalNo, Person.FirstName, Person.LastName, Person.DateOfBirth.ToString("yyyy - MM - dd")
-                         , Person.Adderss, Person.Email, Person.Nationality, Person.PhoneNumber, Person.Gendor);
-                }
-                else
-                {
-                    // MessageBox.Show("Error");
-                    dataGridViewPeopleManage.Rows.Clear();
-                }
-
-                return;
+                HandleListByItem("NationalNumber"); 
             }
 
-            if (FilterSelect(Selected) == enSlected.enFirstName)
+            if (CaseName == WithoutSpaces("First Name"))
             {
-                
-                 persons = clsBusinessPeople.FindPersons("FirstName",  value);
-                if (persons.Count != 0)
-                {
-                    dataGridViewPeopleManage.Rows.Clear();
-                    foreach (clsBusinessPeople Person in persons)
-                    {
 
-                        dataGridViewPeopleManage.Rows.Add(Person.PersonID, Person.NationalNo, Person.FirstName, Person.LastName, Person.DateOfBirth.ToString("yyyy - MM - dd")
-                             , Person.Adderss, Person.Email, Person.Nationality, Person.PhoneNumber, Person.Gendor);
-
-                    }
-                }
-
+                HandleListByItem(CaseName); 
 
 
             }
 
-            if (FilterSelect(Selected) == enSlected.enLastName)
+            if (CaseName == WithoutSpaces("Last Name")) 
             {
-                persons = clsBusinessPeople.FindPersons("LastName", value);
+                HandleListByItem(CaseName); 
                 
-                if (persons.Count != 0)
-                {
-                  
-                    dataGridViewPeopleManage.Rows.Clear();
-                    foreach (clsBusinessPeople Person in persons)
-                    {
-
-                        dataGridViewPeopleManage.Rows.Add(Person.PersonID, Person.NationalNo, Person.FirstName, Person.LastName, Person.DateOfBirth.ToString("yyyy - MM - dd")
-                             , Person.Adderss, Person.Email, Person.Nationality, Person.PhoneNumber, Person.Gendor);
-
-                    }
-                }
             }
 
-            if (FilterSelect(Selected) == enSlected.enNationality)
+            if (CaseName == WithoutSpaces("Nationality")) 
             {
-                
-                persons.Clear(); 
-                persons = clsBusinessPeople.FindPersons("Nationality", value);
-               
-                if (persons.Count != 0)
-                {
-                    MessageBox.Show(persons[0].PersonID.ToString());
-                    MessageBox.Show(persons[1].PersonID.ToString()); 
 
-                    dataGridViewPeopleManage.Rows.Clear();
-                    foreach (clsBusinessPeople Person in persons)
-                    {
-
-                        dataGridViewPeopleManage.Rows.Add(Person.PersonID, Person.NationalNo, Person.FirstName, Person.LastName, Person.DateOfBirth.ToString("yyyy - MM - dd")
-                             , Person.Adderss, Person.Email, Person.Nationality, Person.PhoneNumber, Person.Gendor);
-
-                    }
-                }
-                
-
-
-
+                HandleListByItem(CaseName); 
 
             }
 
-             
+
+            if (CaseName == WithoutSpaces("Gender"))
+            {
+
+                HandleListByItem(CaseName);
+
+            }
+
+            if (CaseName == WithoutSpaces("Phone"))
+            {
+
+                HandleListByItem("PhoneNumber");
+
+            }
+            if (CaseName == WithoutSpaces("Email"))
+            {
+
+                HandleListByItem(CaseName);
+
+            }
+
+
+
         }
         
-        private enSlected FilterSelect(int Num)
-        { 
-            switch(Num)
-            {
-                case 1:
-                    return enSlected.enPersonID;
-                case 2:
-                    return enSlected.enNationalityNo; 
-                case 3:
-                    return enSlected.enFirstName;
-                case 4:
-                    return enSlected.enLastName;
-                case 5:
-                    return enSlected.enNationality;
-                case 6:
-                    return enSlected.enGendor;
-                case 7:
-                    return enSlected.enPhone;
-                default:
-                    return enSlected.enEmail; 
-            }
-        
-        
-        }
+      
         private void CheckFilter(string text)
         {
             if(text!="None")
@@ -208,7 +192,7 @@ namespace PresntationLayerLic
             }
             else
             {
-                txtBoxFilter.Visible = false;
+                txtBoxFilter.Visible = false; 
 
             }
 
