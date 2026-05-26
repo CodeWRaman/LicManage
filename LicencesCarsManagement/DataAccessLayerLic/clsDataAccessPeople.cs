@@ -124,6 +124,10 @@ namespace DataAccessLayerLic
         {
             bool isFound = false;
             SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
+            if (!ClsDataAccessValidation.ValidationOnCaseName(caseName))
+            {
+                throw new ArgumentException("Invalid column name.");
+            }
             string query = "Select *From Persons Where " + caseName + " = @value";
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -191,7 +195,7 @@ namespace DataAccessLayerLic
             List<clsPeopleDOT> ListPeople = new List<clsPeopleDOT>();
 
             SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
-            if(ClsDataAccessValidation.ValidationOnCaseName(caseName))
+            if(!ClsDataAccessValidation.ValidationOnCaseName(caseName))
             {
                  throw new ArgumentException("Invalid column name.");
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace PresntationLayerLic
 {
@@ -28,5 +29,35 @@ namespace PresntationLayerLic
             return number; 
                 
         }
+
+
+
+
+        public static bool isEmail(string email)
+        {
+            try
+            {
+                // must include -> System.Net.Mail; Library to use this Class 
+                MailAddress address = new MailAddress(email);
+
+                return address.Address == email; 
+
+            }
+            catch
+            {
+                return false; 
+            }
+
+
+
+        }
+
+
+
+
+
+
     }
+
+
 }

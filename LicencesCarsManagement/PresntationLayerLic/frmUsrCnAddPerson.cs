@@ -1,0 +1,176 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PresntationLayerLic
+{
+    public partial class frmUsrCnAddPerson : Form
+    {
+        public frmUsrCnAddPerson()
+        {
+            InitializeComponent();
+            
+        }
+        private void frmUsrCnAddPerson_Load(object sender, EventArgs e)
+        {
+            ResetToDefaultAddPrForm(); 
+          
+        }
+        private void  ResetToDefaultAddPrForm()
+        {
+            int birthYear = DateTime.Now.Year - 18;
+            DateTime birthDate = new DateTime(birthYear, DateTime.Now.Month, DateTime.Now.Day);
+            DtPikerAddPr.MaxDate = birthDate;
+            rdBtnMel.Checked = true;
+            
+        }
+
+        // Start Validation 
+        private void txtUsrCnAdPrFirName_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUsrCnAdPrFirName.Text))
+            {
+                e.Cancel = true;
+                errorProvider3.SetError(txtUsrCnAdPrFirName, "First Name Must Provided"); 
+            }
+            else
+            {
+                errorProvider3.SetError(txtUsrCnAdPrFirName, ""); 
+
+                e.Cancel = false;
+              
+
+            }
+        }
+        private void txtUsrCnAdPrSecName_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUsrCnAdPrSecName.Text))
+            {
+                e.Cancel = true;
+                errorProvider3.SetError(txtUsrCnAdPrSecName, "Second Name Must Provided");
+            }
+            else
+            {
+                errorProvider3.SetError(txtUsrCnAdPrSecName, "");
+
+                e.Cancel = false;
+
+
+            }
+        }
+
+        private void txtUsrCnAdPrThirdName_Validating(object sender, CancelEventArgs e)
+        {
+            
+                 if (string.IsNullOrEmpty(txtUsrCnAdPrThirdName.Text))
+            {
+                e.Cancel = true;
+                errorProvider3.SetError(txtUsrCnAdPrThirdName, "Third Name Must Provided");
+            }
+            else
+            {
+                errorProvider3.SetError(txtUsrCnAdPrThirdName, "");
+
+                e.Cancel = false;
+
+
+            }
+
+        }
+
+        private void txtEmlPreson_Validating(object sender, CancelEventArgs e)
+        {
+            if(!clsValidation.isEmail(txtEmlPreson.Text) && txtEmlPreson.Text != "")
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtEmlPreson, "Invalid Email Address"); 
+               
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(txtEmlPreson, "");
+            }
+        }
+
+
+        private void txtAdrsAdPr_Validating(object sender, CancelEventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtAdrsAdPr.Text))
+            {
+                e.Cancel = true;
+                errorProvider2.SetError(txtAdrsAdPr, "Provide Address"); 
+            }
+            else
+            {
+
+                e.Cancel = false; 
+                errorProvider2.SetError(txtAdrsAdPr, ""); 
+
+            }
+        }
+
+       
+
+
+
+        // Start Logic 
+        private void rdBtnMel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdBtnMel.Checked)
+            {
+
+                picAddPrs.Load(@"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png");
+
+            }
+            else
+            {
+                picAddPrs.Load(@"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png");
+
+            }
+        }
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void btnClosePrsAdd_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtPhonePrs_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(clsValidation.CheckNumricFormat(e))
+            {
+                e.Handled = true; 
+            }
+            else
+            {
+                e.Handled = false; 
+            }
+        }
+    }
+}

@@ -46,6 +46,9 @@ namespace PresntationLayerLic
 
             dt.Clear(); 
             dt = clsBusinessPeople.GetPeopleFromBusinesss();
+            int num = dt.Rows.Count;
+            lblCountPeople.Text = num.ToString(); 
+            
             if (dt != null)
             {
                 foreach(DataRow row in dt.Rows)
@@ -68,8 +71,7 @@ namespace PresntationLayerLic
             
         }
 
-        // Filter Handling 
-        // by me 
+       
 
         private void HandleListByItem(string CaseName)
         {
@@ -80,6 +82,7 @@ namespace PresntationLayerLic
 
             if (Persons != null)
             {
+                lblCountPeople.Text = Persons.Count.ToString(); 
                 foreach (clsBusinessPeople row in Persons )
                 {
                     dataGridViewPeopleManage.Rows.Add(row.PersonID, row.NationalNo, row.FirstName, row.LastName,
@@ -181,8 +184,13 @@ namespace PresntationLayerLic
 
 
         }
-        
-      
+
+        private void txtBoxFilter_TextChanged(object sender, EventArgs e)
+        {
+            listPeopleByItems(comboFilterPeople.SelectedIndex);
+        }
+
+
         private void CheckFilter(string text)
         {
             if(text!="None")
@@ -198,11 +206,7 @@ namespace PresntationLayerLic
 
         }
 
-          // Events 
-        private void lblXfromMangePeople_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+          
         private void comboFilterPeople_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheckFilter(comboFilterPeople.Text); 
@@ -227,11 +231,17 @@ namespace PresntationLayerLic
 
         }
 
-        private void txtBoxFilter_TextChanged(object sender, EventArgs e)
+       
+
+        private void btnClosePeopleMange_Click(object sender, EventArgs e)
         {
-            listPeopleByItems(comboFilterPeople.SelectedIndex); 
+            this.Close(); 
         }
 
-        
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            frmUsrCnAddPerson frmAddPerson = new frmUsrCnAddPerson();
+            frmAddPerson.ShowDialog(); 
+        }
     }
 }
