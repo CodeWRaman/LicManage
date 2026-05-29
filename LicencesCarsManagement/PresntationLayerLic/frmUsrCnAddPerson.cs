@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using BusinessLayerLic; 
 namespace PresntationLayerLic
 {
     public partial class frmUsrCnAddPerson : Form
@@ -28,9 +28,22 @@ namespace PresntationLayerLic
             DateTime birthDate = new DateTime(birthYear, DateTime.Now.Month, DateTime.Now.Day);
             DtPikerAddPr.MaxDate = birthDate;
             rdBtnMel.Checked = true;
+            linklbRmImage.Visible = false;
+            LoadCountry();
+            cmbCountryAddPr.SelectedIndex = 0;
             
         }
+        public void LoadCountry()
+        {
+            List<clsBusinessCountry> Countries = clsBusinessCountry.ListCountries(); 
 
+            foreach(clsBusinessCountry cr in Countries)
+            {
+                cmbCountryAddPr.Items.Add(cr.CountryName); 
+            }
+
+
+        }
         // Start Validation 
         private void txtUsrCnAdPrFirName_Validating(object sender, CancelEventArgs e)
         {
