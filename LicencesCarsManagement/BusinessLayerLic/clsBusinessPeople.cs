@@ -13,7 +13,7 @@ namespace BusinessLayerLic
     public class clsBusinessPeople
     {
         enum enMode { enAdd ,enUpdate};
-        // oh 
+ 
         enMode Mode = enMode.enAdd; 
 
         public int PersonID { get; set; }
@@ -70,7 +70,44 @@ namespace BusinessLayerLic
 
         }
 
+        // Add & Update 
+        private bool AddPerson()
+        {
+            bool isSuccess = false; 
+            int num = clsDataAccessPeople.AddNewPerson(NationalNo, FirstName, LastName, 
+                DateOfBirth, Adderss, Email, Nationality, PhoneNumber, Gendor, ImagePath, CountryID);
+            if (num != -1)
+            {
+                PersonID = num;
+                 isSuccess = true;
+            }
+            else
+            {
+                PersonID = -1;
+                isSuccess = false; 
+            }
+            return isSuccess; 
+        }
 
+
+        public bool Save()
+        {
+            switch(Mode)
+            {
+                case enMode.enAdd:
+                  return  AddPerson();
+                 
+                    
+                case enMode.enUpdate:
+                    return false; 
+                    
+
+                default:
+                    return false; 
+            }
+        }
+
+        //Find & get Persons 
         public static clsBusinessPeople FindPersonByID(int ID)
         {
             int PerID = ID;

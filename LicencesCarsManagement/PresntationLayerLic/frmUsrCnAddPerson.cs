@@ -12,9 +12,24 @@ namespace PresntationLayerLic
 {
     public partial class frmUsrCnAddPerson : Form
     {
-        public frmUsrCnAddPerson()
+        private int PersonID; 
+        public frmUsrCnAddPerson(int ID)
         {
             InitializeComponent();
+            if(ID != -1)
+            {
+                PersonID = ID; 
+            }
+            else
+            {
+                PersonID = -1; 
+            }
+            
+        }
+        private void ExecuteInsertion()
+        {
+            clsBusinessPeople Person = new clsBusinessPeople(); 
+           
             
         }
         private void frmUsrCnAddPerson_Load(object sender, EventArgs e)
@@ -183,6 +198,18 @@ namespace PresntationLayerLic
             else
             {
                 e.Handled = false; 
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if(PersonID == -1)
+            {
+                ExecuteInsertion(); 
+            }
+            else
+            {
+
             }
         }
     }

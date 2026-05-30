@@ -34,7 +34,7 @@
             this.picIcon1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.PnlAddPersons = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnClosePrsAdd = new System.Windows.Forms.Button();
             this.linklbRmImage = new System.Windows.Forms.LinkLabel();
             this.linklbSetImage = new System.Windows.Forms.LinkLabel();
@@ -126,7 +126,7 @@
             // 
             this.PnlAddPersons.BackColor = System.Drawing.Color.WhiteSmoke;
             this.PnlAddPersons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PnlAddPersons.Controls.Add(this.button3);
+            this.PnlAddPersons.Controls.Add(this.btnSave);
             this.PnlAddPersons.Controls.Add(this.btnClosePrsAdd);
             this.PnlAddPersons.Controls.Add(this.linklbRmImage);
             this.PnlAddPersons.Controls.Add(this.linklbSetImage);
@@ -167,18 +167,19 @@
             this.PnlAddPersons.Size = new System.Drawing.Size(835, 352);
             this.PnlAddPersons.TabIndex = 7;
             // 
-            // button3
+            // btnSave
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(570, 287);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(110, 33);
-            this.button3.TabIndex = 42;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(570, 287);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(110, 33);
+            this.btnSave.TabIndex = 42;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClosePrsAdd
             // 
@@ -643,7 +644,7 @@
         private System.Windows.Forms.LinkLabel linklbSetImage;
         private System.Windows.Forms.PictureBox picAddPrs;
         private System.Windows.Forms.Button btnClosePrsAdd;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.ErrorProvider errorProvider3;
