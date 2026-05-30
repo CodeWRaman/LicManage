@@ -38,6 +38,7 @@ namespace BusinessLayerLic
            this.PersonID = 0;
             this.NationalNo = ""; 
             this.FirstName = "";
+            this.LastName = "";
             this.DateOfBirth = DateTime.Today; 
             this.Adderss = ""; 
             this.Email = ""; 

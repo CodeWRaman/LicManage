@@ -240,7 +240,7 @@ namespace PresntationLayerLic
 
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
-            frmUsrCnAddPerson frmAddPerson = new frmUsrCnAddPerson();
+            frmUsrCnAddPerson frmAddPerson = new frmUsrCnAddPerson(-1);
             frmAddPerson.ShowDialog(); 
         }
     }

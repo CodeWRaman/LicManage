@@ -45,10 +45,8 @@
             this.txtAdrsAdPr = new System.Windows.Forms.TextBox();
             this.txtEmlPreson = new System.Windows.Forms.MaskedTextBox();
             this.txtNtNoPerson = new System.Windows.Forms.MaskedTextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtUsrCnAdPrThirdName = new System.Windows.Forms.MaskedTextBox();
             this.txtUsrCnAdPrSecName = new System.Windows.Forms.MaskedTextBox();
             this.txtUsrCnAdPrFirName = new System.Windows.Forms.MaskedTextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -137,10 +135,8 @@
             this.PnlAddPersons.Controls.Add(this.txtAdrsAdPr);
             this.PnlAddPersons.Controls.Add(this.txtEmlPreson);
             this.PnlAddPersons.Controls.Add(this.txtNtNoPerson);
-            this.PnlAddPersons.Controls.Add(this.label9);
             this.PnlAddPersons.Controls.Add(this.label8);
             this.PnlAddPersons.Controls.Add(this.label4);
-            this.PnlAddPersons.Controls.Add(this.txtUsrCnAdPrThirdName);
             this.PnlAddPersons.Controls.Add(this.txtUsrCnAdPrSecName);
             this.PnlAddPersons.Controls.Add(this.txtUsrCnAdPrFirName);
             this.PnlAddPersons.Controls.Add(this.label7);
@@ -280,17 +276,6 @@
             this.txtNtNoPerson.Size = new System.Drawing.Size(150, 20);
             this.txtNtNoPerson.TabIndex = 31;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.label9.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(580, 14);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 19);
-            this.label9.TabIndex = 30;
-            this.label9.Text = "Third";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -312,15 +297,6 @@
             this.label4.Size = new System.Drawing.Size(39, 19);
             this.label4.TabIndex = 28;
             this.label4.Text = "First ";
-            // 
-            // txtUsrCnAdPrThirdName
-            // 
-            this.txtUsrCnAdPrThirdName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUsrCnAdPrThirdName.Location = new System.Drawing.Point(528, 47);
-            this.txtUsrCnAdPrThirdName.Name = "txtUsrCnAdPrThirdName";
-            this.txtUsrCnAdPrThirdName.Size = new System.Drawing.Size(138, 20);
-            this.txtUsrCnAdPrThirdName.TabIndex = 27;
-            this.txtUsrCnAdPrThirdName.Validating += new System.ComponentModel.CancelEventHandler(this.txtUsrCnAdPrThirdName_Validating);
             // 
             // txtUsrCnAdPrSecName
             // 
@@ -609,10 +585,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel PnlAddPersons;
         private System.Windows.Forms.MaskedTextBox txtNtNoPerson;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.MaskedTextBox txtUsrCnAdPrThirdName;
         private System.Windows.Forms.MaskedTextBox txtUsrCnAdPrSecName;
         private System.Windows.Forms.MaskedTextBox txtUsrCnAdPrFirName;
         private System.Windows.Forms.Label label7;

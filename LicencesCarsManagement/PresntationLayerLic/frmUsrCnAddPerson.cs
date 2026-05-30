@@ -12,7 +12,8 @@ namespace PresntationLayerLic
 {
     public partial class frmUsrCnAddPerson : Form
     {
-        private int PersonID; 
+        private int PersonID;
+        clsBusinessPeople Person; 
         public frmUsrCnAddPerson(int ID)
         {
             InitializeComponent();
@@ -22,15 +23,34 @@ namespace PresntationLayerLic
             }
             else
             {
-                PersonID = -1; 
+
+                Person = new clsBusinessPeople(); 
             }
             
         }
-        private void ExecuteInsertion()
+        private void Save()
         {
-            clsBusinessPeople Person = new clsBusinessPeople(); 
-           
-            
+            Person.NationalNo = txtNtNoPerson.Text;
+            Person.FirstName = txtUsrCnAdPrFirName.Text;
+            Person.LastName = txtUsrCnAdPrSecName.Text;
+            Person.DateOfBirth = (DateTime)DtPikerAddPr.Value;
+            Person.Adderss = txtAdrsAdPr.Text; 
+            if(txtEmlPreson.Text == "")
+            {
+                Person.Email = null; 
+            }
+            else
+            {
+                Person.Email = txtEmlPreson.Text; 
+            }
+            Person.Nationality = cmbCountryAddPr.Text; 
+            Person.ImagePath =
+
+
+
+
+
+
         }
         private void frmUsrCnAddPerson_Load(object sender, EventArgs e)
         {
@@ -93,24 +113,7 @@ namespace PresntationLayerLic
             }
         }
 
-        private void txtUsrCnAdPrThirdName_Validating(object sender, CancelEventArgs e)
-        {
-            
-                 if (string.IsNullOrEmpty(txtUsrCnAdPrThirdName.Text))
-            {
-                e.Cancel = true;
-                errorProvider3.SetError(txtUsrCnAdPrThirdName, "Third Name Must Provided");
-            }
-            else
-            {
-                errorProvider3.SetError(txtUsrCnAdPrThirdName, "");
-
-                e.Cancel = false;
-
-
-            }
-
-        }
+      
 
         private void txtEmlPreson_Validating(object sender, CancelEventArgs e)
         {
@@ -203,14 +206,7 @@ namespace PresntationLayerLic
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(PersonID == -1)
-            {
-                ExecuteInsertion(); 
-            }
-            else
-            {
-
-            }
+            Save(); 
         }
     }
 }
