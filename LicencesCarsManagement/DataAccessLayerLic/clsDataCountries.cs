@@ -58,6 +58,54 @@ namespace DataAccessLayerLic
 
         }
 
+        public static bool FindCountryByName(string Name,ref int ID)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
+            string query = "select *From Countries Where CountryName = @Name";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Name", Name);
+
+          
+
+            try
+            {
+                connection.Open();
+                SqlDataReader read = command.ExecuteReader();
+
+                if (read.Read())
+                {
+                    isFound = true;
+                    ID = (int)read["CountryID"];
+                    Name = (string)read["CountryName"];
+                }
+                else
+                {
+                    isFound = false;
+                }
+
+
+
+                read.Close();
+
+            }
+            catch
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+
+
+
+
+            return isFound;
+        }
+
         public static List<CountryDOT>ListCountries()
         {
             List<CountryDOT> Countries = new List<CountryDOT>();

@@ -39,6 +39,19 @@ namespace BusinessLayerLic
             }
 
         }
+        public static clsBusinessCountry FindCountryByName(string Name)
+        {
+            int ID =0 ;
+
+            if (clsDataCountries.FindCountryByName(Name, ref ID))
+            {
+                return new clsBusinessCountry(ID, Name);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public static List<clsBusinessCountry> ListCountries()
         {

@@ -72,6 +72,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.openAddPicDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon1)).BeginInit();
             this.PnlAddPersons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAddPrs)).BeginInit();
@@ -201,6 +202,7 @@
             this.linklbRmImage.TabIndex = 39;
             this.linklbRmImage.TabStop = true;
             this.linklbRmImage.Text = "Remove Image";
+            this.linklbRmImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbRmImage_LinkClicked);
             // 
             // linklbSetImage
             // 
@@ -212,6 +214,7 @@
             this.linklbSetImage.TabIndex = 38;
             this.linklbSetImage.TabStop = true;
             this.linklbSetImage.Text = "Set Image";
+            this.linklbSetImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbSetImage_LinkClicked);
             // 
             // picAddPrs
             // 
@@ -540,6 +543,10 @@
             // 
             this.errorProvider3.ContainerControl = this;
             // 
+            // openAddPicDialog
+            // 
+            this.openAddPicDialog.FileName = "openFileDialog1";
+            // 
             // frmUsrCnAddPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -622,5 +629,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.ErrorProvider errorProvider3;
+        private System.Windows.Forms.OpenFileDialog openAddPicDialog;
     }
 }

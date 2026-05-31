@@ -7,13 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLayerLic; 
+using BusinessLayerLic;
+using System.IO; 
 namespace PresntationLayerLic
 {
     public partial class frmUsrCnAddPerson : Form
     {
         private int PersonID;
-        clsBusinessPeople Person; 
+        clsBusinessPeople Person;
+        string _selectedPath = "";
+        string DefaultPhoto = ""; 
         public frmUsrCnAddPerson(int ID)
         {
             InitializeComponent();
@@ -43,9 +46,48 @@ namespace PresntationLayerLic
             {
                 Person.Email = txtEmlPreson.Text; 
             }
-            Person.Nationality = cmbCountryAddPr.Text; 
-            Person.ImagePath =
+            Person.Nationality = cmbCountryAddPr.Text;
+            
+            if (picAddPrs.ImageLocation != null)
+            {
+                Guid fileName = Guid.NewGuid();
 
+                string newPathCopy = @"C:\DLVDTEST\" + fileName + ".png";
+                if(_selectedPath != "")
+                File.Copy(_selectedPath, newPathCopy);
+                if(Person.ImagePath !="")
+                File.Delete(Person.ImagePath);
+
+                if (_selectedPath != "")
+                    Person.ImagePath = newPathCopy;
+                else
+                    Person.ImagePath = "";
+
+                
+            }
+
+            Person.PhoneNumber = txtPhonePrs.Text; 
+            if(rdBtnFemel.Checked)
+            {
+                Person.Gendor = "F"; 
+            }
+            else
+            {
+                Person.Gendor = "M"; 
+            }
+
+            Person.CountryID = clsBusinessCountry.FindCountryByName(cmbCountryAddPr.Text).CountryID;
+
+
+            if(Person.Save())
+            {
+                MessageBox.Show("Data Saved Successfully"); 
+            }
+            else
+            {
+                MessageBox.Show("Data Failed"); 
+
+            }
 
 
 
@@ -66,7 +108,18 @@ namespace PresntationLayerLic
             linklbRmImage.Visible = false;
             LoadCountry();
             cmbCountryAddPr.SelectedIndex = 0;
-            
+            // _selectedPath = picAddPrs.ImageLocation;
+            if (rdBtnFemel.Checked)
+            {
+                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
+                picAddPrs.Load(DefaultPhoto);
+            }
+            else
+            {
+                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
+                picAddPrs.Load(DefaultPhoto);
+            }
+
         }
         public void LoadCountry()
         {
@@ -147,9 +200,7 @@ namespace PresntationLayerLic
             }
         }
 
-       
-
-
+     
 
         // Start Logic 
         private void rdBtnMel_CheckedChanged(object sender, EventArgs e)
@@ -168,22 +219,6 @@ namespace PresntationLayerLic
         }
 
        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -207,6 +242,41 @@ namespace PresntationLayerLic
         private void btnSave_Click(object sender, EventArgs e)
         {
             Save(); 
+        }
+
+        
+        private void linklbSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openAddPicDialog.InitialDirectory = @"c:\";
+            openAddPicDialog.DefaultExt = "png";
+            openAddPicDialog.Filter = "Photos (*.jbg)|*.jbg|Photos (*.png)|*.*|All files(*.*)|*.*";
+        
+            if (openAddPicDialog.ShowDialog() == DialogResult.OK)
+            {
+                _selectedPath = openAddPicDialog.FileName;
+                picAddPrs.Load(_selectedPath);
+                linklbRmImage.Visible = true; 
+            }
+
+          
+        }
+
+        private void linklbRmImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { 
+            picAddPrs.ImageLocation = null;
+            linklbRmImage.Visible = false;
+            DefaultPhoto = "";
+            if (rdBtnFemel.Checked)
+            {
+                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
+                picAddPrs.Load(DefaultPhoto);
+            }
+            else
+            {
+                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
+                picAddPrs.Load(DefaultPhoto);
+            }
+
         }
     }
 }
