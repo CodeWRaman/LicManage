@@ -14,8 +14,8 @@ namespace BusinessLayerLic
         public string CountryName { get; set; }
         public clsBusinessCountry()
         {
-            int CountryID = 0;
-            string CountryName = ""; 
+             CountryID = 0;
+             CountryName = ""; 
         }
 
         public clsBusinessCountry(int Id,string Name)

@@ -13,23 +13,87 @@ namespace PresntationLayerLic
 {
     public partial class frmUsrCnAddPerson : Form
     {
+         
         private int PersonID;
-        clsBusinessPeople Person;
+        clsBusinessPeople Person = new clsBusinessPeople();
         string _selectedPath = "";
         string DefaultPhoto = ""; 
         public frmUsrCnAddPerson(int ID)
         {
             InitializeComponent();
-            if(ID != -1)
+            ResetToDefaultAddPrForm();
+            if (ID != -1)
             {
                 PersonID = ID; 
+             bringPersonDataInForm();
             }
             else
             {
 
-                Person = new clsBusinessPeople(); 
+                PersonID = -1;
             }
-            
+        }
+
+        public void bringPersonDataInForm()
+        {
+            if (PersonID == -1)
+                return;
+
+            lblTitel.Text = "Update Person"; 
+            Person = clsBusinessPeople.FindPersonByID(PersonID);
+            lbReturndIDPr.Text = Person.PersonID.ToString(); 
+            txtUsrCnAdPrFirName.Text = Person.FirstName;
+            txtUsrCnAdPrSecName.Text = Person.LastName;
+            txtNtNoPerson.Text = Person.NationalNo;
+
+            txtEmlPreson.Text = (Person.Email != "" ? Person.Email : "");
+
+            txtAdrsAdPr.Text = Person.Adderss;
+            DtPikerAddPr.Value = Person.DateOfBirth;
+
+            if (Person.ImagePath != "")
+            {
+                
+                picAddPrs.Load(Person.ImagePath);
+                linklbRmImage.Visible = true; 
+                
+            }
+
+           
+
+            string Load = "";
+            if (Person.Gendor == "M" )
+            {
+                rdBtnMel.Checked = true;
+                if(Person.ImagePath == "")
+                {
+                    Load = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
+                    picAddPrs.Load(Load);
+                }
+              
+            }
+            else
+            {
+                rdBtnFemel.Checked = true;
+                if (Person.ImagePath == "")
+                {
+                    Load = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
+                    picAddPrs.Load(Load);
+                }
+
+            }
+
+            cmbCountryAddPr.SelectedValue = clsBusinessCountry.FindCountryByID(Person.CountryID).CountryName;
+
+            txtPhonePrs.Text = Person.PhoneNumber;
+
+            Person.Mode = clsBusinessPeople.enMode.enUpdate;
+
+
+
+
+
+
         }
         private void Save()
         {
@@ -46,27 +110,12 @@ namespace PresntationLayerLic
             {
                 Person.Email = txtEmlPreson.Text; 
             }
+
             Person.Nationality = cmbCountryAddPr.Text;
             
-            if (picAddPrs.ImageLocation != null)
-            {
-                Guid fileName = Guid.NewGuid();
-
-                string newPathCopy = @"C:\DLVDTEST\" + fileName + ".png";
-                if(_selectedPath != "")
-                File.Copy(_selectedPath, newPathCopy);
-                if(Person.ImagePath !="")
-                File.Delete(Person.ImagePath);
-
-                if (_selectedPath != "")
-                    Person.ImagePath = newPathCopy;
-                else
-                    Person.ImagePath = "";
-
-                
-            }
 
             Person.PhoneNumber = txtPhonePrs.Text; 
+
             if(rdBtnFemel.Checked)
             {
                 Person.Gendor = "F"; 
@@ -78,25 +127,53 @@ namespace PresntationLayerLic
 
             Person.CountryID = clsBusinessCountry.FindCountryByName(cmbCountryAddPr.Text).CountryID;
 
+            // Handle Image Path 
+            Guid fileName = Guid.NewGuid();
+            string newPathCopy = @"C:\DLVDTEST\" + fileName + ".png";
+            string ToDelete = Person.ImagePath; 
 
+            if (picAddPrs.ImageLocation != null)
+            {
+               
+                //if(_selectedPath != "")
+                //File.Copy(_selectedPath, newPathCopy);
+                //if(Person.ImagePath !="")
+                //File.Delete(Person.ImagePath);
+
+
+                if (_selectedPath != "")
+                    Person.ImagePath = newPathCopy;
+                else
+                    Person.ImagePath = "";
+
+                
+            }
+
+            // Saving and Copied file 
             if(Person.Save())
             {
                 MessageBox.Show("Data Saved Successfully"); 
+                if(_selectedPath != "")
+                File.Copy(_selectedPath, newPathCopy);
+                if(ToDelete !="")
+                File.Delete(ToDelete);
+                lbReturndIDPr.Text = Person.PersonID.ToString(); 
             }
             else
             {
-                MessageBox.Show("Data Failed"); 
+                MessageBox.Show("Insertion a person Failed"); 
+               
 
             }
 
 
-
+    
 
 
         }
         private void frmUsrCnAddPerson_Load(object sender, EventArgs e)
         {
-            ResetToDefaultAddPrForm(); 
+            
           
         }
         private void  ResetToDefaultAddPrForm()
@@ -112,12 +189,12 @@ namespace PresntationLayerLic
             if (rdBtnFemel.Checked)
             {
                 DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
-                picAddPrs.Load(DefaultPhoto);
+                 picAddPrs.Load(DefaultPhoto);
             }
             else
             {
                 DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
-                picAddPrs.Load(DefaultPhoto);
+                  picAddPrs.Load(DefaultPhoto);
             }
 
         }
@@ -205,6 +282,9 @@ namespace PresntationLayerLic
         // Start Logic 
         private void rdBtnMel_CheckedChanged(object sender, EventArgs e)
         {
+            if (Person.ImagePath != "")
+                return; 
+
             if (rdBtnMel.Checked)
             {
 

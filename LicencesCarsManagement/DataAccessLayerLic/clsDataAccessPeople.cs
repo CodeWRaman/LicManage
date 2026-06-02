@@ -253,26 +253,39 @@ namespace DataAccessLayerLic
             return ListPeople;
         }
 
-        public static int AddNewPerson(string NationalNo,string FirstName,string LastName,DateTime DateOfBirth,string Address,string Email,
+        public static int AddNewPerson(string NationalNumber, string FirstName,string LastName,DateTime DateOfBirth,string Address,string Email,
             string Nationality,string ImagePath,string PhoneNumber,string Gender,int CountryID)
         {
             int PersonID = 0; 
-            SqlConnection connection = new SqlConnection(AccountSetting.connectionStr); 
-            string query = @"Insert Into Persons (NationalNumber, FirstName, LastName, DateOfBirth, Address,Email,Nationality,ImagePath,PhoneNumber,Gender,CountryID) values (
-@NationalNo,@FirstName,@LastName,@DateOfBirth,@Address,@Email,@Nationality,@ImagePath,@PhoneNumber,@Gender,@CountryID); Select SCOPE_IDENTITY();";
+            SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
+            string query = "INSERT INTO Persons (NationalNumber, FirstName, LastName, DateOfBirth, Address, Email, Nationality, ImagePath, PhoneNumber, Gender, CountryID) VALUES (@NationalNumber, @FirstName, @LastName, @DateOfBirth, @Address, @Email, @Nationality, @ImagePath, @PhoneNumber, @Gender, @CountryID); SELECT SCOPE_IDENTITY();";
+
+
 
             SqlCommand cmd = new SqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@NationalNo", NationalNo);
+            cmd.Parameters.AddWithValue("@NationalNumber", NationalNumber);
             cmd.Parameters.AddWithValue("@FirstName", FirstName);
             cmd.Parameters.AddWithValue("@LastName", LastName);
             cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
             cmd.Parameters.AddWithValue("@Address", Address);
-            cmd.Parameters.AddWithValue("@Email", Email);
+            if (Email != "" && Email != null)
+                cmd.Parameters.AddWithValue("@Email", Email);
+            else
+                cmd.Parameters.AddWithValue("@Email", System.DBNull.Value);
+
             cmd.Parameters.AddWithValue("@Nationality", Nationality);
-            cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
+
+            if (ImagePath != "" && ImagePath != null)
+                cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
+            else
+                cmd.Parameters.AddWithValue("@ImagePath", System.DBNull.Value);
+
             cmd.Parameters.AddWithValue("@PhoneNumber", PhoneNumber);
             cmd.Parameters.AddWithValue("@Gender", Gender);
             cmd.Parameters.AddWithValue("@CountryID", CountryID);
+
+
+            
 
             try
             {
@@ -280,7 +293,7 @@ namespace DataAccessLayerLic
                 object result = cmd.ExecuteScalar(); 
                 if(result!=null && int.TryParse(result.ToString(),out int ID))
                 {
-                    return PersonID = ID;
+                     PersonID = ID;
                 }
                 else
                 {
@@ -289,7 +302,7 @@ namespace DataAccessLayerLic
             }
             catch
             {
-                return PersonID = -1; 
+                 PersonID = -5; 
 
             }
             finally

@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsrCnAddPerson));
             this.lbUsrAdPrID = new System.Windows.Forms.Label();
             this.picIcon1 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblTitel = new System.Windows.Forms.Label();
             this.PnlAddPersons = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClosePrsAdd = new System.Windows.Forms.Button();
@@ -110,16 +110,16 @@
             this.picIcon1.TabIndex = 5;
             this.picIcon1.TabStop = false;
             // 
-            // label2
+            // lblTitel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Firebrick;
-            this.label2.Location = new System.Drawing.Point(343, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 28);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Add New Person";
+            this.lblTitel.AutoSize = true;
+            this.lblTitel.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitel.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblTitel.Location = new System.Drawing.Point(343, 68);
+            this.lblTitel.Name = "lblTitel";
+            this.lblTitel.Size = new System.Drawing.Size(189, 28);
+            this.lblTitel.TabIndex = 6;
+            this.lblTitel.Text = "Add New Person";
             // 
             // PnlAddPersons
             // 
@@ -219,7 +219,6 @@
             // picAddPrs
             // 
             this.picAddPrs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picAddPrs.Image = ((System.Drawing.Image)(resources.GetObject("picAddPrs.Image")));
             this.picAddPrs.Location = new System.Drawing.Point(697, 124);
             this.picAddPrs.Name = "picAddPrs";
             this.picAddPrs.Size = new System.Drawing.Size(117, 116);
@@ -348,9 +347,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(19, 124);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 19);
+            this.label5.Size = new System.Drawing.Size(68, 19);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Gemder:";
+            this.label5.Text = "Gender:";
             // 
             // lblUrCnAdDtBir
             // 
@@ -556,7 +555,7 @@
             this.ClientSize = new System.Drawing.Size(893, 498);
             this.Controls.Add(this.lbReturndIDPr);
             this.Controls.Add(this.PnlAddPersons);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblTitel);
             this.Controls.Add(this.picIcon1);
             this.Controls.Add(this.lbUsrAdPrID);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -589,7 +588,7 @@
         #endregion
         private System.Windows.Forms.Label lbUsrAdPrID;
         private System.Windows.Forms.PictureBox picIcon1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTitel;
         private System.Windows.Forms.Panel PnlAddPersons;
         private System.Windows.Forms.MaskedTextBox txtNtNoPerson;
         private System.Windows.Forms.Label label8;

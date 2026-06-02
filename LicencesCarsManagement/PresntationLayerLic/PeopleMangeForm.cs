@@ -44,7 +44,8 @@ namespace PresntationLayerLic
         private void RestToDefault()
         {
 
-            dt.Clear(); 
+            dt.Clear();
+            dataGridViewPeopleManage.Rows.Clear(); 
             dt = clsBusinessPeople.GetPeopleFromBusinesss();
             int num = dt.Rows.Count;
             lblCountPeople.Text = num.ToString(); 
@@ -241,7 +242,17 @@ namespace PresntationLayerLic
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
             frmUsrCnAddPerson frmAddPerson = new frmUsrCnAddPerson(-1);
-            frmAddPerson.ShowDialog(); 
+            frmAddPerson.ShowDialog();
+            RestToDefault(); 
+          
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int Id = (int) dataGridViewPeopleManage.CurrentRow.Cells[0].Value;
+            frmUsrCnAddPerson frmForEdit = new frmUsrCnAddPerson(Id);
+            frmForEdit.Show();
+            RestToDefault(); 
         }
     }
 }

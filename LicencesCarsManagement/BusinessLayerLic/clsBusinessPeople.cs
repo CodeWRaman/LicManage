@@ -12,9 +12,9 @@ namespace BusinessLayerLic
 {
     public class clsBusinessPeople
     {
-        enum enMode { enAdd ,enUpdate};
+       public enum enMode { enAdd ,enUpdate};
  
-        enMode Mode = enMode.enAdd; 
+        
 
         public int PersonID { get; set; }
         public string NationalNo { get; set; }
@@ -31,7 +31,10 @@ namespace BusinessLayerLic
         public string ImagePath { get; set; }
         public int CountryID { get; set; }
 
+        public enMode Mode { get; set; }
         static public int NumberTest { get; set; }
+
+
 
         public clsBusinessPeople()
         {
@@ -76,15 +79,15 @@ namespace BusinessLayerLic
         {
             bool isSuccess = false; 
             int num = clsDataAccessPeople.AddNewPerson(NationalNo, FirstName, LastName, 
-                DateOfBirth, Adderss, Email, Nationality, PhoneNumber, Gendor, ImagePath, CountryID);
-            if (num != -1)
+                DateOfBirth, Adderss, Email, Nationality,ImagePath,PhoneNumber,Gendor, CountryID);
+            if (num > 0)
             {
                 PersonID = num;
                  isSuccess = true;
             }
             else
             {
-                PersonID = -1;
+                PersonID = num;
                 isSuccess = false; 
             }
             return isSuccess; 
@@ -96,7 +99,7 @@ namespace BusinessLayerLic
             switch(Mode)
             {
                 case enMode.enAdd:
-                  return  AddPerson();
+                  return AddPerson();
                  
                     
                 case enMode.enUpdate:
