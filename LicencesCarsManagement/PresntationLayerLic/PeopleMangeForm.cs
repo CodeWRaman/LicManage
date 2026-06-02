@@ -251,8 +251,9 @@ namespace PresntationLayerLic
         {
             int Id = (int) dataGridViewPeopleManage.CurrentRow.Cells[0].Value;
             frmUsrCnAddPerson frmForEdit = new frmUsrCnAddPerson(Id);
+            frmForEdit.ToRestForm += RestToDefault;
             frmForEdit.Show();
-            RestToDefault(); 
+            
         }
     }
 }

@@ -13,11 +13,17 @@ namespace PresntationLayerLic
 {
     public partial class frmUsrCnAddPerson : Form
     {
-         
+        // Variables 
+        public delegate void DelOnAdd();
+        public event DelOnAdd ToRestForm;
+        
         private int PersonID;
         clsBusinessPeople Person = new clsBusinessPeople();
         string _selectedPath = "";
-        string DefaultPhoto = ""; 
+        string DefaultPhoto = "";
+        string ToDelete = ""; 
+
+        // Start Functionality 
         public frmUsrCnAddPerson(int ID)
         {
             InitializeComponent();
@@ -130,21 +136,17 @@ namespace PresntationLayerLic
             // Handle Image Path 
             Guid fileName = Guid.NewGuid();
             string newPathCopy = @"C:\DLVDTEST\" + fileName + ".png";
-            string ToDelete = Person.ImagePath; 
+            if(Person.ImagePath != "" && ToDelete == "")
+                ToDelete = Person.ImagePath; 
 
             if (picAddPrs.ImageLocation != null)
             {
                
-                //if(_selectedPath != "")
-                //File.Copy(_selectedPath, newPathCopy);
-                //if(Person.ImagePath !="")
-                //File.Delete(Person.ImagePath);
-
+           
 
                 if (_selectedPath != "")
                     Person.ImagePath = newPathCopy;
-                else
-                    Person.ImagePath = "";
+               
 
                 
             }
@@ -154,28 +156,26 @@ namespace PresntationLayerLic
             {
                 MessageBox.Show("Data Saved Successfully"); 
                 if(_selectedPath != "")
-                File.Copy(_selectedPath, newPathCopy);
-                if(ToDelete !="")
+                File.Copy(_selectedPath, newPathCopy); 
+
+                if(ToDelete !="" && Person.Mode == clsBusinessPeople.enMode.enUpdate && Person.ImagePath != ToDelete)
                 File.Delete(ToDelete);
-                lbReturndIDPr.Text = Person.PersonID.ToString(); 
+
+                lbReturndIDPr.Text = Person.PersonID.ToString();
+               
             }
             else
             {
-                MessageBox.Show("Insertion a person Failed"); 
+                MessageBox.Show("Insertion a person Failed","Message",MessageBoxButtons.OK,MessageBoxIcon.Error); 
                
 
             }
 
-
-    
+            ToRestForm?.Invoke(); 
 
 
         }
-        private void frmUsrCnAddPerson_Load(object sender, EventArgs e)
-        {
-            
-          
-        }
+        
         private void  ResetToDefaultAddPrForm()
         {
             int birthYear = DateTime.Now.Year - 18;
@@ -346,6 +346,12 @@ namespace PresntationLayerLic
             picAddPrs.ImageLocation = null;
             linklbRmImage.Visible = false;
             DefaultPhoto = "";
+            if (Person.ImagePath != "")
+                ToDelete = Person.ImagePath; 
+
+            Person.ImagePath = "";
+            
+            
             if (rdBtnFemel.Checked)
             {
                 DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";

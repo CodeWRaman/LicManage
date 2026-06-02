@@ -563,7 +563,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
-            this.Load += new System.EventHandler(this.frmUsrCnAddPerson_Load);
+            
             ((System.ComponentModel.ISupportInitialize)(this.picIcon1)).EndInit();
             this.PnlAddPersons.ResumeLayout(false);
             this.PnlAddPersons.PerformLayout();

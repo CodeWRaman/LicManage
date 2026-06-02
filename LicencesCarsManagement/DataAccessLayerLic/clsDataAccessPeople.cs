@@ -315,7 +315,67 @@ namespace DataAccessLayerLic
             return PersonID; 
         }
 
-        
+
+
+        public static bool UpdatePerson(int ID,string NationalNumber,string FirstName,string LastName,DateTime DateOfBirth,string Address,string Email,
+            string Nationality,string ImagePath,string PhoneNumber,string Gender,int CountryID)
+        {
+            bool isUpdated = false;
+
+            SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
+            string query = @"Update Persons Set NationalNumber = @NationalNumber,FirstName = @FirstName, LastName = @LastName, DateOfBirth = @DateOfBirth, Address = @Address, Email = @Email, Nationality = @Nationality, ImagePath = @ImagePath, PhoneNumber = @PhoneNumber, Gender = @Gender, CountryID = @CountryID Where PersonID= @ID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ID", ID);
+            command.Parameters.AddWithValue("@NationalNumber", NationalNumber);
+            command.Parameters.AddWithValue("@FirstName", FirstName);
+            command.Parameters.AddWithValue("@LastName", LastName);
+            command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+            command.Parameters.AddWithValue("@Address", Address);
+            if (Email != "" && Email != null)
+                command.Parameters.AddWithValue("@Email", Email);
+            else
+                command.Parameters.AddWithValue("@Email", System.DBNull.Value); 
+            command.Parameters.AddWithValue("@Nationality", Nationality);
+            if (ImagePath != "" && ImagePath != null)
+                command.Parameters.AddWithValue("@ImagePath", ImagePath);
+            else
+                command.Parameters.AddWithValue("@ImagePath", System.DBNull.Value); 
+
+            command.Parameters.AddWithValue("@PhoneNumber", PhoneNumber);
+            command.Parameters.AddWithValue("@Gender", Gender);
+            command.Parameters.AddWithValue("@CountryID", CountryID);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteNonQuery(); 
+
+                if(result!=null)
+                {
+                    isUpdated = true; 
+                }
+                else
+                {
+                    isUpdated = false;
+                }
+
+
+
+
+
+            }
+            catch
+            {
+                isUpdated = false; 
+            }
+            finally
+            {
+                connection.Close(); 
+            }
+
+            return isUpdated; 
+
+        }
 
 
 

@@ -13,8 +13,7 @@ namespace BusinessLayerLic
     public class clsBusinessPeople
     {
        public enum enMode { enAdd ,enUpdate};
- 
-        
+
 
         public int PersonID { get; set; }
         public string NationalNo { get; set; }
@@ -93,6 +92,15 @@ namespace BusinessLayerLic
             return isSuccess; 
         }
 
+        private bool UpdatePerson()
+        {
+            bool result = clsDataAccessPeople.UpdatePerson(PersonID, NationalNo, FirstName, LastName, DateOfBirth, Adderss, Email, Nationality, ImagePath, PhoneNumber, Gendor, CountryID);
+
+            if (result)
+                return true;
+            else
+                return false;
+        }
 
         public bool Save()
         {
@@ -103,7 +111,7 @@ namespace BusinessLayerLic
                  
                     
                 case enMode.enUpdate:
-                    return false; 
+                    return UpdatePerson(); 
                     
 
                 default:
