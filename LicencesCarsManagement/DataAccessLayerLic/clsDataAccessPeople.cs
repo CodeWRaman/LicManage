@@ -17,10 +17,14 @@ namespace DataAccessLayerLic
             DataTable db = new DataTable(); 
             SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
 
-            string query = @"Select Persons.PersonID,Persons.NationalNumber, Persons.FirstName,Persons.LastName,
-                            Persons.DateOfBirth,Persons.Address,Persons.Email,Nationality = Countries.CountryName,Persons.PhoneNumber,Persons.Gender From Persons Inner Join Countries ON Persons.CountryID = Countries.CountryID;";
+            /*string query = @"Select Persons.PersonID,Persons.NationalNumber, Persons.FirstName,Persons.LastName,
+              Persons.DateOfBirth,Persons.Address,Persons.Email,Nationality = 
+            Countries.CountryName,Persons.PhoneNumber,Persons.Gender From Persons Inner Join 
+            Countries ON Persons.CountryID = Countries.CountryID;";*/
 
-            SqlCommand cmd = new SqlCommand(query, connection);
+            string queryView = "Select *From vPersonsInfo"; 
+
+            SqlCommand cmd = new SqlCommand(queryView, connection);
 
             try
             {
@@ -124,7 +128,7 @@ namespace DataAccessLayerLic
         {
             bool isFound = false;
             SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
-            if (!ClsDataAccessValidation.ValidationOnCaseName(caseName))
+            if (!ClsDataAccessValidation.ValidationOnCaseNamePersons(caseName))
             {
                 throw new ArgumentException("Invalid column name.");
             }
@@ -195,7 +199,7 @@ namespace DataAccessLayerLic
             List<clsPeopleDOT> ListPeople = new List<clsPeopleDOT>();
 
             SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
-            if(!ClsDataAccessValidation.ValidationOnCaseName(caseName))
+            if(!ClsDataAccessValidation.ValidationOnCaseNamePersons(caseName))
             {
                  throw new ArgumentException("Invalid column name.");
             }
@@ -377,7 +381,47 @@ namespace DataAccessLayerLic
 
         }
 
+        public static bool DeletePersonFromDB(int Id,ref string Message)
+        {
+            bool isDeleted = false;
+            SqlConnection connection = new SqlConnection(AccountSetting.connectionStr);
+            string query = "Delete From Persons Where PersonID = @Id";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@Id", Id);
 
+            try
+            {
+                connection.Open();
+                int NumberRowEffect = cmd.ExecuteNonQuery();
+                if (NumberRowEffect > 0)
+                {
+                    Message = "Deletion Done Successfully";
+                    isDeleted = true; 
+                }
+                else
+                {
+                    Message = "Something went wrong";
+                    isDeleted = false; 
+                }
+            }
+            catch(SqlException ex)
+            {
+                if(ex.Number == 547) // foreign key 
+                {
+                    Message = "Cannot delete this person because it is used in other records."; 
+                }
+                else
+                {
+                    Message = "Database Error: " + ex.Message; 
+                }
+            }
+            finally
+            {
+                connection.Close(); 
+            }
+
+            return isDeleted; 
+        }
 
 
     }

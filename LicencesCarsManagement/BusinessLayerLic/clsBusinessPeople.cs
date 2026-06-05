@@ -20,13 +20,13 @@ namespace BusinessLayerLic
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string Adderss { get; set; }
+        public string Address { get; set; }
         public string Email { get; set; }
         public string Nationality { get; set; }
 
 
         public string PhoneNumber { get; set; }
-        public string Gendor { get; set; }
+        public string Gender { get; set; }
         public string ImagePath { get; set; }
         public int CountryID { get; set; }
 
@@ -42,11 +42,11 @@ namespace BusinessLayerLic
             this.FirstName = "";
             this.LastName = "";
             this.DateOfBirth = DateTime.Today; 
-            this.Adderss = ""; 
+            this.Address = ""; 
             this.Email = ""; 
            this. Nationality = "";
            this.PhoneNumber = "";
-            this.Gendor = "";
+            this.Gender = "";
             this.ImagePath = "";
             this.CountryID = 0; 
             Mode = enMode.enAdd;
@@ -54,18 +54,18 @@ namespace BusinessLayerLic
 
         }
         public clsBusinessPeople(int PersonID,string NationalNo,string FirstName,string LastName,DateTime DateOfBirth,string Address,string Email,
-            string Nationallity,string PhoneNumber,string Gendor,string imagePath,int CountryID)
+            string Nationality,string PhoneNumber,string Gender,string imagePath,int CountryID)
         {
             this.PersonID = PersonID;
             this.NationalNo = NationalNo; 
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.DateOfBirth =DateOfBirth;
-            this.Adderss = Address; 
+            this.Address = Address; 
             this.Email = Email; 
-            this.Nationality = Nationallity;
+            this.Nationality = Nationality;
             this.PhoneNumber = PhoneNumber;
-            this.Gendor = Gendor;
+            this.Gender = Gender;
             this.ImagePath = imagePath;
             this.CountryID = CountryID;
             Mode = enMode.enUpdate;
@@ -73,12 +73,12 @@ namespace BusinessLayerLic
 
         }
 
-        // Add & Update 
+        // Add & Update & Deletion  
         private bool AddPerson()
         {
             bool isSuccess = false; 
             int num = clsDataAccessPeople.AddNewPerson(NationalNo, FirstName, LastName, 
-                DateOfBirth, Adderss, Email, Nationality,ImagePath,PhoneNumber,Gendor, CountryID);
+                DateOfBirth, Address, Email, Nationality,ImagePath,PhoneNumber,Gender, CountryID);
             if (num > 0)
             {
                 PersonID = num;
@@ -94,7 +94,7 @@ namespace BusinessLayerLic
 
         private bool UpdatePerson()
         {
-            bool result = clsDataAccessPeople.UpdatePerson(PersonID, NationalNo, FirstName, LastName, DateOfBirth, Adderss, Email, Nationality, ImagePath, PhoneNumber, Gendor, CountryID);
+            bool result = clsDataAccessPeople.UpdatePerson(PersonID, NationalNo, FirstName, LastName, DateOfBirth, Address, Email, Nationality, ImagePath, PhoneNumber, Gender, CountryID);
 
             if (result)
                 return true;
@@ -118,6 +118,22 @@ namespace BusinessLayerLic
                     return false; 
             }
         }
+
+        public static string DeletePersonBL(int Id)
+        {
+            string Message = "";
+            string result = ""; 
+
+            if(clsDataAccessPeople.DeletePersonFromDB(Id,ref Message))
+                result = Message; 
+            else
+                result = Message; 
+            
+
+            return result; 
+
+        }
+
 
         //Find & get Persons 
         public static clsBusinessPeople FindPersonByID(int ID)
@@ -186,11 +202,11 @@ namespace BusinessLayerLic
                 person.FirstName = pe.FirstName;
                 person.LastName = pe.LastName;
                 person.DateOfBirth = pe.DateOfBirth;
-                person.Adderss = pe.Address;
+                person.Address = pe.Address;
                 person.Nationality = pe.Nationality;
                 person.PhoneNumber = pe.PhoneNumber;
                 person.Email = pe.Email;
-                person.Gendor = pe.Gendor;
+                person.Gender = pe.Gendor;
                 person.ImagePath = pe.ImagePath;
                 person.CountryID = pe.CountryID;
                 List.Add(person); 

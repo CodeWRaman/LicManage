@@ -35,6 +35,8 @@
             this.DriversParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.UsersParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AccountParentMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CuurrentUserInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePasswirdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainmenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,10 +82,23 @@
             // 
             // AccountParentMenu
             // 
+            this.AccountParentMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CuurrentUserInfo,
+            this.changePasswirdToolStripMenuItem});
             resources.ApplyResources(this.AccountParentMenu, "AccountParentMenu");
             this.AccountParentMenu.Name = "AccountParentMenu";
             this.AccountParentMenu.Padding = new System.Windows.Forms.Padding(0, 7, 0, 8);
             this.AccountParentMenu.Click += new System.EventHandler(this.toolMenuStrip_Click);
+            // 
+            // CuurrentUserInfo
+            // 
+            resources.ApplyResources(this.CuurrentUserInfo, "CuurrentUserInfo");
+            this.CuurrentUserInfo.Name = "CuurrentUserInfo";
+            // 
+            // changePasswirdToolStripMenuItem
+            // 
+            resources.ApplyResources(this.changePasswirdToolStripMenuItem, "changePasswirdToolStripMenuItem");
+            this.changePasswirdToolStripMenuItem.Name = "changePasswirdToolStripMenuItem";
             // 
             // MainForm
             // 
@@ -109,6 +124,8 @@
         private System.Windows.Forms.ToolStripMenuItem PeopleParentMenu;
         private System.Windows.Forms.ToolStripMenuItem DriversParentMenu;
         private System.Windows.Forms.ToolStripMenuItem AccountParentMenu;
+        private System.Windows.Forms.ToolStripMenuItem CuurrentUserInfo;
+        private System.Windows.Forms.ToolStripMenuItem changePasswirdToolStripMenuItem;
     }
 }
 

@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsValidation.cs" />
+    <Compile Include="frmLoginUrs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoginUrs.Designer.cs">
+      <DependentUpon>frmLoginUrs.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUsrCnAddPerson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmLoginUrs.resx">
+      <DependentUpon>frmLoginUrs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmUsrCnAddPerson.resx">
       <DependentUpon>frmUsrCnAddPerson.cs</DependentUpon>
     </EmbeddedResource>

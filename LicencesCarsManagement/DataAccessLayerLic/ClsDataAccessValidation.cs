@@ -9,7 +9,7 @@ namespace DataAccessLayerLic
     public class ClsDataAccessValidation
     {
         // this function will Handle the Column -> which is Static <- Not the value  
-        public static bool ValidationOnCaseName(string CaseName)
+        public static bool ValidationOnCaseNamePersons(string CaseName)
         {
             switch(CaseName)
             {

@@ -14,7 +14,7 @@ namespace PresntationLayerLic
 {
     public partial class PeopleMangeForm : Form
     {
-        private DataTable dt = new DataTable(); 
+        private DataTable _dt = new DataTable(); 
 
        
         public PeopleMangeForm()
@@ -44,15 +44,15 @@ namespace PresntationLayerLic
         private void RestToDefault()
         {
 
-            dt.Clear();
+            _dt.Clear();
             dataGridViewPeopleManage.Rows.Clear(); 
-            dt = clsBusinessPeople.GetPeopleFromBusinesss();
-            int num = dt.Rows.Count;
+            _dt = clsBusinessPeople.GetPeopleFromBusinesss();
+            int num = _dt.Rows.Count;
             lblCountPeople.Text = num.ToString(); 
             
-            if (dt != null)
+            if (_dt != null)
             {
-                foreach(DataRow row in dt.Rows)
+                foreach(DataRow row in _dt.Rows)
                 {
                     dataGridViewPeopleManage.Rows.Add(row["PersonID"], row["NationalNumber"], row["FirstName"], row["LastName"],
                         Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy - MM - dd"), row["Address"], row["Email"], row["Nationality"],
@@ -87,8 +87,8 @@ namespace PresntationLayerLic
                 foreach (clsBusinessPeople row in Persons )
                 {
                     dataGridViewPeopleManage.Rows.Add(row.PersonID, row.NationalNo, row.FirstName, row.LastName,
-                        Convert.ToDateTime(row.DateOfBirth).ToString("yyyy - MM - dd"), row.Adderss, row.Email, row.Nationality,
-                        row.PhoneNumber, row.Gendor);
+                        Convert.ToDateTime(row.DateOfBirth).ToString("yyyy - MM - dd"), row.Address, row.Email, row.Nationality,
+                        row.PhoneNumber, row.Gender);
 
                 }
             }
@@ -122,7 +122,7 @@ namespace PresntationLayerLic
                 {
                     dataGridViewPeopleManage.Rows.Clear();
                     dataGridViewPeopleManage.Rows.Add(Person.PersonID, Person.NationalNo, Person.FirstName, Person.LastName, Person.DateOfBirth.ToString("yyyy - MM - dd")
-                         , Person.Adderss, Person.Email, Person.Nationality, Person.PhoneNumber, Person.Gendor);
+                         , Person.Address, Person.Email, Person.Nationality, Person.PhoneNumber, Person.Gender);
                 }
                 else
                 {
@@ -254,6 +254,17 @@ namespace PresntationLayerLic
             frmForEdit.ToRestForm += RestToDefault;
             frmForEdit.Show();
             
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are You Sure to delete this Person ?","Warning",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                string Message = clsBusinessPeople.DeletePersonBL((int) dataGridViewPeopleManage.CurrentRow.Cells[0].Value);
+                MessageBox.Show(Message);
+                RestToDefault(); 
+            }
+
         }
     }
 }

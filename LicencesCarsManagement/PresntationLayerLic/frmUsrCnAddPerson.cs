@@ -17,11 +17,11 @@ namespace PresntationLayerLic
         public delegate void DelOnAdd();
         public event DelOnAdd ToRestForm;
         
-        private int PersonID;
-        clsBusinessPeople Person = new clsBusinessPeople();
+        private int _PersonID;
+        clsBusinessPeople _Person = new clsBusinessPeople();
         string _selectedPath = "";
-        string DefaultPhoto = "";
-        string ToDelete = ""; 
+        string _DefaultPhoto = "";
+        string _ToDelete = ""; 
 
         // Start Functionality 
         public frmUsrCnAddPerson(int ID)
@@ -30,37 +30,37 @@ namespace PresntationLayerLic
             ResetToDefaultAddPrForm();
             if (ID != -1)
             {
-                PersonID = ID; 
+                _PersonID = ID; 
              bringPersonDataInForm();
             }
             else
             {
 
-                PersonID = -1;
+                _PersonID = -1;
             }
         }
 
         public void bringPersonDataInForm()
         {
-            if (PersonID == -1)
+            if (_PersonID == -1)
                 return;
 
             lblTitel.Text = "Update Person"; 
-            Person = clsBusinessPeople.FindPersonByID(PersonID);
-            lbReturndIDPr.Text = Person.PersonID.ToString(); 
-            txtUsrCnAdPrFirName.Text = Person.FirstName;
-            txtUsrCnAdPrSecName.Text = Person.LastName;
-            txtNtNoPerson.Text = Person.NationalNo;
+            _Person = clsBusinessPeople.FindPersonByID(_PersonID);
+            lbReturndIDPr.Text = _Person.PersonID.ToString(); 
+            txtUsrCnAdPrFirName.Text = _Person.FirstName;
+            txtUsrCnAdPrSecName.Text = _Person.LastName;
+            txtNtNoPerson.Text = _Person.NationalNo;
 
-            txtEmlPreson.Text = (Person.Email != "" ? Person.Email : "");
+            txtEmlPreson.Text = (_Person.Email != "" ? _Person.Email : "");
 
-            txtAdrsAdPr.Text = Person.Adderss;
-            DtPikerAddPr.Value = Person.DateOfBirth;
+            txtAdrsAdPr.Text = _Person.Address;
+            DtPikerAddPr.Value = _Person.DateOfBirth;
 
-            if (Person.ImagePath != "")
+            if (_Person.ImagePath != "")
             {
                 
-                picAddPrs.Load(Person.ImagePath);
+                picAddPrs.Load(_Person.ImagePath);
                 linklbRmImage.Visible = true; 
                 
             }
@@ -68,10 +68,10 @@ namespace PresntationLayerLic
            
 
             string Load = "";
-            if (Person.Gendor == "M" )
+            if (_Person.Gender == "M" )
             {
                 rdBtnMel.Checked = true;
-                if(Person.ImagePath == "")
+                if(_Person.ImagePath == "")
                 {
                     Load = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
                     picAddPrs.Load(Load);
@@ -81,7 +81,7 @@ namespace PresntationLayerLic
             else
             {
                 rdBtnFemel.Checked = true;
-                if (Person.ImagePath == "")
+                if (_Person.ImagePath == "")
                 {
                     Load = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
                     picAddPrs.Load(Load);
@@ -89,11 +89,11 @@ namespace PresntationLayerLic
 
             }
 
-            cmbCountryAddPr.SelectedValue = clsBusinessCountry.FindCountryByID(Person.CountryID).CountryName;
+            cmbCountryAddPr.SelectedIndex = cmbCountryAddPr.FindString(clsBusinessCountry.FindCountryByID(_Person.CountryID).CountryName);
 
-            txtPhonePrs.Text = Person.PhoneNumber;
+            txtPhonePrs.Text = _Person.PhoneNumber;
 
-            Person.Mode = clsBusinessPeople.enMode.enUpdate;
+            _Person.Mode = clsBusinessPeople.enMode.enUpdate;
 
 
 
@@ -103,41 +103,41 @@ namespace PresntationLayerLic
         }
         private void Save()
         {
-            Person.NationalNo = txtNtNoPerson.Text;
-            Person.FirstName = txtUsrCnAdPrFirName.Text;
-            Person.LastName = txtUsrCnAdPrSecName.Text;
-            Person.DateOfBirth = (DateTime)DtPikerAddPr.Value;
-            Person.Adderss = txtAdrsAdPr.Text; 
+            _Person.NationalNo = txtNtNoPerson.Text;
+            _Person.FirstName = txtUsrCnAdPrFirName.Text;
+            _Person.LastName = txtUsrCnAdPrSecName.Text;
+            _Person.DateOfBirth = (DateTime)DtPikerAddPr.Value;
+            _Person.Address = txtAdrsAdPr.Text; 
             if(txtEmlPreson.Text == "")
             {
-                Person.Email = null; 
+                _Person.Email = null; 
             }
             else
             {
-                Person.Email = txtEmlPreson.Text; 
+                _Person.Email = txtEmlPreson.Text; 
             }
 
-            Person.Nationality = cmbCountryAddPr.Text;
+            _Person.Nationality = cmbCountryAddPr.Text;
             
 
-            Person.PhoneNumber = txtPhonePrs.Text; 
+            _Person.PhoneNumber = txtPhonePrs.Text; 
 
             if(rdBtnFemel.Checked)
             {
-                Person.Gendor = "F"; 
+                _Person.Gender = "F"; 
             }
             else
             {
-                Person.Gendor = "M"; 
+                _Person.Gender = "M"; 
             }
 
-            Person.CountryID = clsBusinessCountry.FindCountryByName(cmbCountryAddPr.Text).CountryID;
+            _Person.CountryID = clsBusinessCountry.FindCountryByName(cmbCountryAddPr.Text).CountryID;
 
             // Handle Image Path 
             Guid fileName = Guid.NewGuid();
             string newPathCopy = @"C:\DLVDTEST\" + fileName + ".png";
-            if(Person.ImagePath != "" && ToDelete == "")
-                ToDelete = Person.ImagePath; 
+            if(_Person.ImagePath != "" && _ToDelete == "")
+                _ToDelete = _Person.ImagePath; 
 
             if (picAddPrs.ImageLocation != null)
             {
@@ -145,23 +145,23 @@ namespace PresntationLayerLic
            
 
                 if (_selectedPath != "")
-                    Person.ImagePath = newPathCopy;
+                    _Person.ImagePath = newPathCopy;
                
 
                 
             }
 
             // Saving and Copied file 
-            if(Person.Save())
+            if(_Person.Save())
             {
                 MessageBox.Show("Data Saved Successfully"); 
                 if(_selectedPath != "")
                 File.Copy(_selectedPath, newPathCopy); 
 
-                if(ToDelete !="" && Person.Mode == clsBusinessPeople.enMode.enUpdate && Person.ImagePath != ToDelete)
-                File.Delete(ToDelete);
+                if(_ToDelete !="" && _Person.Mode == clsBusinessPeople.enMode.enUpdate && _Person.ImagePath != _ToDelete)
+                File.Delete(_ToDelete);
 
-                lbReturndIDPr.Text = Person.PersonID.ToString();
+                lbReturndIDPr.Text = _Person.PersonID.ToString();
                
             }
             else
@@ -188,13 +188,13 @@ namespace PresntationLayerLic
             // _selectedPath = picAddPrs.ImageLocation;
             if (rdBtnFemel.Checked)
             {
-                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
-                 picAddPrs.Load(DefaultPhoto);
+                _DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
+                 picAddPrs.Load(_DefaultPhoto);
             }
             else
             {
-                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
-                  picAddPrs.Load(DefaultPhoto);
+                _DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
+                  picAddPrs.Load(_DefaultPhoto);
             }
 
         }
@@ -282,7 +282,7 @@ namespace PresntationLayerLic
         // Start Logic 
         private void rdBtnMel_CheckedChanged(object sender, EventArgs e)
         {
-            if (Person.ImagePath != "")
+            if (_Person.ImagePath != "")
                 return; 
 
             if (rdBtnMel.Checked)
@@ -327,6 +327,12 @@ namespace PresntationLayerLic
         
         private void linklbSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (linklbRmImage.Visible)
+            {
+                MessageBox.Show("Remove the Picture First", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             openAddPicDialog.InitialDirectory = @"c:\";
             openAddPicDialog.DefaultExt = "png";
             openAddPicDialog.Filter = "Photos (*.jbg)|*.jbg|Photos (*.png)|*.*|All files(*.*)|*.*";
@@ -345,22 +351,23 @@ namespace PresntationLayerLic
         { 
             picAddPrs.ImageLocation = null;
             linklbRmImage.Visible = false;
-            DefaultPhoto = "";
-            if (Person.ImagePath != "")
-                ToDelete = Person.ImagePath; 
+            _DefaultPhoto = "";
+            if (_Person.ImagePath != "")
+                _ToDelete = _Person.ImagePath; 
 
-            Person.ImagePath = "";
+            _Person.ImagePath = "";
+            _selectedPath = ""; 
             
             
             if (rdBtnFemel.Checked)
             {
-                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
-                picAddPrs.Load(DefaultPhoto);
+                _DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Female 512.png";
+                picAddPrs.Load(_DefaultPhoto);
             }
             else
             {
-                DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
-                picAddPrs.Load(DefaultPhoto);
+                _DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
+                picAddPrs.Load(_DefaultPhoto);
             }
 
         }

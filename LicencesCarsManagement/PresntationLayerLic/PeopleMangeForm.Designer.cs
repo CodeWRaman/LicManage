@@ -43,6 +43,9 @@
             this.clNationallity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clPhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctxEditDelet = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblFilter = new System.Windows.Forms.Label();
             this.comboFilterPeople = new System.Windows.Forms.ComboBox();
             this.txtBoxFilter = new System.Windows.Forms.TextBox();
@@ -52,12 +55,9 @@
             this.btnClosePeopleMange = new System.Windows.Forms.Button();
             this.lblCountPeople = new System.Windows.Forms.Label();
             this.lblRecordsPeople = new System.Windows.Forms.Label();
-            this.ctxEditDelet = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPeopleManage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ctxEditDelet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewPeopleManage
@@ -150,6 +150,28 @@
             // 
             this.clGender.HeaderText = "Gender";
             this.clGender.Name = "clGender";
+            // 
+            // ctxEditDelet
+            // 
+            this.ctxEditDelet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.ctxEditDelet.Name = "ctxEditDelet";
+            this.ctxEditDelet.Size = new System.Drawing.Size(181, 70);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // lblFilter
             // 
@@ -256,27 +278,6 @@
             this.lblRecordsPeople.TabIndex = 11;
             this.lblRecordsPeople.Text = "# Records : ";
             // 
-            // ctxEditDelet
-            // 
-            this.ctxEditDelet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.ctxEditDelet.Name = "ctxEditDelet";
-            this.ctxEditDelet.Size = new System.Drawing.Size(181, 70);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            // 
             // PeopleMangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,8 +300,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage People";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPeopleManage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ctxEditDelet.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
