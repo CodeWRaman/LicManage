@@ -37,6 +37,7 @@
             this.AccountParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CuurrentUserInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswirdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainmenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +85,8 @@
             // 
             this.AccountParentMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CuurrentUserInfo,
-            this.changePasswirdToolStripMenuItem});
+            this.changePasswirdToolStripMenuItem,
+            this.signOutToolStripMenuItem});
             resources.ApplyResources(this.AccountParentMenu, "AccountParentMenu");
             this.AccountParentMenu.Name = "AccountParentMenu";
             this.AccountParentMenu.Padding = new System.Windows.Forms.Padding(0, 7, 0, 8);
@@ -100,6 +102,12 @@
             resources.ApplyResources(this.changePasswirdToolStripMenuItem, "changePasswirdToolStripMenuItem");
             this.changePasswirdToolStripMenuItem.Name = "changePasswirdToolStripMenuItem";
             // 
+            // signOutToolStripMenuItem
+            // 
+            resources.ApplyResources(this.signOutToolStripMenuItem, "signOutToolStripMenuItem");
+            this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
+            this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -109,6 +117,7 @@
             this.MainMenuStrip = this.MainmenuStrip;
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.MainmenuStrip.ResumeLayout(false);
             this.MainmenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -126,6 +135,7 @@
         private System.Windows.Forms.ToolStripMenuItem AccountParentMenu;
         private System.Windows.Forms.ToolStripMenuItem CuurrentUserInfo;
         private System.Windows.Forms.ToolStripMenuItem changePasswirdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem signOutToolStripMenuItem;
     }
 }
 

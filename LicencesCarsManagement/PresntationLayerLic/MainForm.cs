@@ -15,21 +15,24 @@ namespace PresntationLayerLic
         public MainForm()
         {
             InitializeComponent();
+          
 
         }
         // Forms 
-        private void openPeopleManagementForm()
-        {
-            PeopleMangeForm frm = new PeopleMangeForm();
-            frm.ShowDialog(); 
-        }
+      
         
         // Utility 
         private void RecieveMenueStrip(ToolStripMenuItem item)
         {
             if(item == PeopleParentMenu)
             {
-                openPeopleManagementForm();
+                PeopleMangeForm frm = new PeopleMangeForm();
+                frm.ShowDialog();
+            }
+            if(item == UsersParentMenu)
+            {
+                frmUsers frm = new frmUsers();
+                frm.ShowDialog(); 
             }
         }
 
@@ -38,6 +41,17 @@ namespace PresntationLayerLic
             RecieveMenueStrip((ToolStripMenuItem)sender); 
         }
 
-       
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLoginUrs frm = new frmLoginUrs();
+            frm.Show();
+            this.Close();
+            
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

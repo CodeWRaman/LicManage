@@ -14,9 +14,8 @@ namespace PresntationLayerLic
     public partial class frmUsrCnAddPerson : Form
     {
         // Variables 
-        public delegate void DelOnAdd();
-        public event DelOnAdd ToRestForm;
         
+
         private int _PersonID;
         clsBusinessPeople _Person = new clsBusinessPeople();
         string _selectedPath = "";
@@ -51,10 +50,13 @@ namespace PresntationLayerLic
             txtUsrCnAdPrFirName.Text = _Person.FirstName;
             txtUsrCnAdPrSecName.Text = _Person.LastName;
             txtNtNoPerson.Text = _Person.NationalNo;
+            if (_Person.Email == "")
+                txtEmlPreson.Text = "";
+            else 
+                txtEmlPreson.Text = _Person.Email;
+               
 
-            txtEmlPreson.Text = (_Person.Email != "" ? _Person.Email : "");
-
-            txtAdrsAdPr.Text = _Person.Address;
+                txtAdrsAdPr.Text = _Person.Address;
             DtPikerAddPr.Value = _Person.DateOfBirth;
 
             if (_Person.ImagePath != "")
@@ -171,7 +173,8 @@ namespace PresntationLayerLic
 
             }
 
-            ToRestForm?.Invoke(); 
+            //ToRestForm?.Invoke();
+            
 
 
         }
@@ -304,6 +307,7 @@ namespace PresntationLayerLic
 
         private void btnClosePrsAdd_Click(object sender, EventArgs e)
         {
+         
             this.Close();
         }
 
@@ -369,6 +373,11 @@ namespace PresntationLayerLic
                 _DefaultPhoto = @"C:\Users\Admin\OneDrive\Desktop\Managemnt Licenses Project\Icons\Male 512.png";
                 picAddPrs.Load(_DefaultPhoto);
             }
+
+        }
+
+        private void frmUsrCnAddPerson_Load(object sender, EventArgs e)
+        {
 
         }
     }

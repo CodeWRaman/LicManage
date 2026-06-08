@@ -27,4 +27,17 @@ namespace DataAccessLayerLic
 
         
     }
+    public class clsUsersDOT : clsPeopleDOT
+    {
+        public int UserID { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public bool isActive { get; set; }
+
+        public string FullName { get; set; }
+
+
+
+
+    }
 }

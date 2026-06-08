@@ -16,11 +16,15 @@ namespace PresntationLayerLic
         public frmLoginUrs()
         {
             InitializeComponent();
+            RetrieveFromFile();
+
         }
 
         private void lbExit_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            // close eniter app 
+            Application.Exit();
+            
         }
         private void EnableDisablecheckBox()
         {
@@ -128,7 +132,7 @@ namespace PresntationLayerLic
         }
         private void frmLoginUrs_Load(object sender, EventArgs e)
         {
-            RetrieveFromFile(); 
+           // RetrieveFromFile(); 
             if (txtPasswordLogin.Text == "" || txtUserLogIn.Text == "")
                 chBoxRememberme.Enabled = false;
             else
@@ -149,15 +153,30 @@ namespace PresntationLayerLic
         {
             bool isExist = clsBusinessUsers.isExist(txtUserLogIn.Text, txtPasswordLogin.Text);
             if (isExist)
-            { 
-                MainForm frm = new MainForm();
-                frm.ShowDialog();
+            {
+                if (clsBusinessUsers.isBUserActive(txtUserLogIn.Text))
+                {
+                    this.Hide();
+                    MainForm frm = new MainForm();
+                    frm.ShowDialog();
+                    
+                }
+                else
+                {
+                    MessageBox.Show("User is Deactivated,Check with Director", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                 
             }
 
             else
             {
-                MessageBox.Show("Not Found", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("invalid Username/Password", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            
         }
+
+        
     }
 }

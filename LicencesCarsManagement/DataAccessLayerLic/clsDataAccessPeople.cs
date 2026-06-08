@@ -80,8 +80,12 @@ namespace DataAccessLayerLic
                     FirstName = (string) reader["FirstName"]; 
                     LastName = (string) reader["LastName"]; 
                     DateOfBirth = (DateTime) reader["DateOfBirth"];
-                    Address = (string) reader["Address"]; 
-                    Email = (string) reader["Email"]; 
+                    Address = (string) reader["Address"];
+                    if (reader["Email"] == System.DBNull.Value)
+                        Email = "";
+                    else
+                        Email = (string)reader["Email"]; 
+
                     Nationallity = (string) reader["Nationality"]; 
                     PhoneNumber = (string) reader["PhoneNumber"]; 
                     Gendor = (string) reader["Gender"];

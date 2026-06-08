@@ -40,5 +40,33 @@ namespace DataAccessLayerLic
                     return false; 
             }
         }
+
+
+        public static bool VaildateOnUsersColumns(string ColumnName)
+        {
+            switch(ColumnName)
+            {
+                case "UserID":
+                    return true;
+                case "PersonID":
+                    return true;
+                case "UserName":
+                    return true;
+                case "isActive":
+                    return true;
+                case "FullName":
+                    return true; 
+               
+                default:
+                    return false; 
+            }
+
+        }
+
+
+
     }
+
+
+    
 }

@@ -44,8 +44,14 @@
             this.clPhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ctxEditDelet = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showDetialsToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.addPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.sendEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.phoneCallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblFilter = new System.Windows.Forms.Label();
             this.comboFilterPeople = new System.Windows.Forms.ComboBox();
             this.txtBoxFilter = new System.Windows.Forms.TextBox();
@@ -62,6 +68,7 @@
             // 
             // dataGridViewPeopleManage
             // 
+            this.dataGridViewPeopleManage.AllowUserToAddRows = false;
             this.dataGridViewPeopleManage.AllowUserToOrderColumns = true;
             this.dataGridViewPeopleManage.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewPeopleManage.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
@@ -87,6 +94,7 @@
             this.clPhoneNumber,
             this.clGender});
             this.dataGridViewPeopleManage.ContextMenuStrip = this.ctxEditDelet;
+            this.dataGridViewPeopleManage.EnableHeadersVisualStyles = false;
             this.dataGridViewPeopleManage.GridColor = System.Drawing.Color.White;
             this.dataGridViewPeopleManage.Location = new System.Drawing.Point(93, 271);
             this.dataGridViewPeopleManage.Name = "dataGridViewPeopleManage";
@@ -154,24 +162,83 @@
             // ctxEditDelet
             // 
             this.ctxEditDelet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showDetialsToolStripMenu,
+            this.toolStripMenuItem2,
+            this.addPersonToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.sendEmailToolStripMenuItem,
+            this.phoneCallToolStripMenuItem});
             this.ctxEditDelet.Name = "ctxEditDelet";
-            this.ctxEditDelet.Size = new System.Drawing.Size(181, 70);
+            this.ctxEditDelet.Size = new System.Drawing.Size(166, 244);
+            // 
+            // showDetialsToolStripMenu
+            // 
+            this.showDetialsToolStripMenu.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showDetialsToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("showDetialsToolStripMenu.Image")));
+            this.showDetialsToolStripMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showDetialsToolStripMenu.Name = "showDetialsToolStripMenu";
+            this.showDetialsToolStripMenu.Size = new System.Drawing.Size(165, 38);
+            this.showDetialsToolStripMenu.Text = "Show Details";
+            this.showDetialsToolStripMenu.Click += new System.EventHandler(this.showDetialsToolStripMenu_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(162, 6);
+            // 
+            // addPersonToolStripMenuItem
+            // 
+            this.addPersonToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addPersonToolStripMenuItem.Image")));
+            this.addPersonToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.addPersonToolStripMenuItem.Name = "addPersonToolStripMenuItem";
+            this.addPersonToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
+            this.addPersonToolStripMenuItem.Text = "Add Person";
+            this.addPersonToolStripMenuItem.Click += new System.EventHandler(this.addPersonToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
+            this.editToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
+            this.editToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
+            this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
+            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
+            // 
+            // sendEmailToolStripMenuItem
+            // 
+            this.sendEmailToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sendEmailToolStripMenuItem.Image")));
+            this.sendEmailToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.sendEmailToolStripMenuItem.Name = "sendEmailToolStripMenuItem";
+            this.sendEmailToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
+            this.sendEmailToolStripMenuItem.Text = "Send Email";
+            this.sendEmailToolStripMenuItem.Click += new System.EventHandler(this.sendEmailToolStripMenuItem_Click);
+            // 
+            // phoneCallToolStripMenuItem
+            // 
+            this.phoneCallToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("phoneCallToolStripMenuItem.Image")));
+            this.phoneCallToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.phoneCallToolStripMenuItem.Name = "phoneCallToolStripMenuItem";
+            this.phoneCallToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
+            this.phoneCallToolStripMenuItem.Text = "Phone Call";
+            this.phoneCallToolStripMenuItem.Click += new System.EventHandler(this.phoneCallToolStripMenuItem_Click);
             // 
             // lblFilter
             // 
@@ -299,6 +366,7 @@
             this.Name = "PeopleMangeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage People";
+            this.Load += new System.EventHandler(this.PeopleMangeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPeopleManage)).EndInit();
             this.ctxEditDelet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -331,5 +399,11 @@
         private System.Windows.Forms.ContextMenuStrip ctxEditDelet;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showDetialsToolStripMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addPersonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sendEmailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem phoneCallToolStripMenuItem;
     }
 }

@@ -54,7 +54,7 @@ namespace PresntationLayerLic
             {
                 foreach(DataRow row in _dt.Rows)
                 {
-                    dataGridViewPeopleManage.Rows.Add(row["PersonID"], row["NationalNumber"], row["FirstName"], row["LastName"],
+                    dataGridViewPeopleManage.Rows.Add(row["PersonID"], row["NationalNumber"], row["FirstName"] , row["LastName"],
                         Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy - MM - dd"), row["Address"], row["Email"], row["Nationality"],
                         row["PhoneNumber"], row["Gender"]);
                    
@@ -86,6 +86,7 @@ namespace PresntationLayerLic
                 lblCountPeople.Text = Persons.Count.ToString(); 
                 foreach (clsBusinessPeople row in Persons )
                 {
+                    
                     dataGridViewPeopleManage.Rows.Add(row.PersonID, row.NationalNo, row.FirstName, row.LastName,
                         Convert.ToDateTime(row.DateOfBirth).ToString("yyyy - MM - dd"), row.Address, row.Email, row.Nationality,
                         row.PhoneNumber, row.Gender);
@@ -243,6 +244,7 @@ namespace PresntationLayerLic
         {
             frmUsrCnAddPerson frmAddPerson = new frmUsrCnAddPerson(-1);
             frmAddPerson.ShowDialog();
+ 
             RestToDefault(); 
           
         }
@@ -251,8 +253,8 @@ namespace PresntationLayerLic
         {
             int Id = (int) dataGridViewPeopleManage.CurrentRow.Cells[0].Value;
             frmUsrCnAddPerson frmForEdit = new frmUsrCnAddPerson(Id);
-            frmForEdit.ToRestForm += RestToDefault;
-            frmForEdit.Show();
+            frmForEdit.ShowDialog();
+            RestToDefault(); 
             
         }
 
@@ -261,10 +263,39 @@ namespace PresntationLayerLic
             if(MessageBox.Show("Are You Sure to delete this Person ?","Warning",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 string Message = clsBusinessPeople.DeletePersonBL((int) dataGridViewPeopleManage.CurrentRow.Cells[0].Value);
-                MessageBox.Show(Message);
+                MessageBox.Show(Message, "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 RestToDefault(); 
             }
 
+        }
+
+        private void PeopleMangeForm_Load(object sender, EventArgs e)
+        {
+            RestToDefault();
+        }
+
+        private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUsrCnAddPerson frm = new frmUsrCnAddPerson(-1);
+            frm.Show(); 
+        }
+
+        private void sendEmailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Feature Not Implemented yet", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+        }
+
+        private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Feature Not Implemented yet", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+        }
+
+        private void showDetialsToolStripMenu_Click(object sender, EventArgs e)
+        {
+            frmShowPersonInfo frm = new frmShowPersonInfo((int)dataGridViewPeopleManage.CurrentRow.Cells[0].Value); 
+            frm.ShowDialog();
+            RestToDefault(); 
         }
     }
 }
